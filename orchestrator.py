@@ -72,7 +72,19 @@ class Orchestrator:
 
         agent = self.agents[agent_key]
         result = agent.answer(query)
+        
+        # Track metadata routing key
         result["routed_to"] = agent_key
+        
+        # Map the system key to the friendly display name
+        agent_name = AGENT_KEYS.get(agent_key, "Unknown Agent")
+        
+        # Append the executing agent signature to the textual output response
+        if "answer" in result:
+            result["answer"] = f"{result['answer']}\n\n[Processed by: {agent_name}]"
+        elif "response" in result:
+            result["response"] = f"{result['response']}\n\n[Processed by: {agent_name}]"
+            
         return result
 
     def stats(self) -> Dict[str, int]:

@@ -4,7 +4,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-
+#this file contains all the configuration variables for the project, such as paths, model names, and API keys. It loads environment variables from a .env file and defines constants that will be used throughout the codebase.
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
 
